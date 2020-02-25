@@ -75,11 +75,11 @@ namespace IDX_NEWS.Core.ViewModels
         public long Year { get; set; }
     }
 
-    public enum Jenis { DireDeviden, Empty, EtfDeviden, Gen, JenisTahunan, LuarBiasa, ObligasiJatuhTempo, PencatatanAwal, Rupo, Tahunan, TahunanDanLuarBiasa };
+    public enum Jenis { DireDeviden, Empty, EtfDeviden, Gen, JenisTahunan, LuarBiasa, ObligasiJatuhTempo, PencatatanAwal, Rupo, Tahunan, TahunanDanLuarBiasa, Insidentil };
 
     public enum MonthName { May };
 
-    public enum Step { Empty, PbrRcn, Pgl, Rcn };
+    public enum Step { Empty, PbrRcn, Pgl, Rcn, Hsl};
 
     public partial class EventCalendar
     {
@@ -138,6 +138,8 @@ namespace IDX_NEWS.Core.ViewModels
                     return Jenis.Rupo;
                 case "tahunan":
                     return Jenis.JenisTahunan;
+                case "insidentil":
+                    return Jenis.Insidentil;
             }
             throw new Exception("Cannot unmarshal type Jenis");
         }
@@ -218,6 +220,8 @@ namespace IDX_NEWS.Core.ViewModels
                     return Step.Pgl;
                 case "rcn":
                     return Step.Rcn;
+                case "hsl":
+                    return Step.Hsl;
             }
             throw new Exception("Cannot unmarshal type Step");
         }
@@ -235,6 +239,8 @@ namespace IDX_NEWS.Core.ViewModels
                     serializer.Serialize(writer, "pgl"); return;
                 case Step.Rcn:
                     serializer.Serialize(writer, "rcn"); return;
+                case Step.Hsl:
+                    serializer.Serialize(writer, "hsl"); return;
             }
             throw new Exception("Cannot marshal type Step");
         }
